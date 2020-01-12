@@ -2,5 +2,11 @@
 
 from subprocess import PIPE, run
 
-logs = run(["git", "log"], stdout=PIPE, stderr=PIPE, universal_newlines=True)
-print("The logs are:\n", logs.stdout)
+
+def main():
+    logs = run(["git", "log"], capture_output=True, text=True)
+    print("The logs are:\n", logs.stdout)
+
+
+if __name__== "__main__":
+    main()
