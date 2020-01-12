@@ -1,9 +1,7 @@
-#!/usr/bin/env python3.7
-
-from subprocess import PIPE, run
+from subprocess import run
 
 
-def main():
+def categorize_logs():
     logs = run(["git", "log", "--pretty=format:\"%cn - %cd - %s\""], capture_output=True, text=True)
     logs = logs.stdout.replace("\"", "").split("\n")
 
@@ -45,6 +43,10 @@ def main():
             formatted_logs["uncategorized"].append(log)
 
     print("The logs are:\n", formatted_logs)
+
+def main():
+    logs = categorize_logs()
+
 
 
 if __name__== "__main__":
