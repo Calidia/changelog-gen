@@ -2,7 +2,7 @@ from subprocess import run
 
 
 def categorize_logs():
-    logs = run(["git", "log", "--pretty=format:\"%cn - %cd - %s\""], capture_output=True, text=True)
+    logs = run(["git", "log", "--pretty=format:\"\u2022 %cn - %cd %s\""], capture_output=True, text=True)
     logs = logs.stdout.replace("\"", "").split("\n")
 
     formatted_logs = {"uncategorized": []}
@@ -10,7 +10,6 @@ def categorize_logs():
     for log in logs:
         if "feature:" in log:
             if "features" in formatted_logs:
-                print(formatted_logs)
                 formatted_logs["features"].append(log)
             else:
                 formatted_logs["features"] = [log]
@@ -43,10 +42,24 @@ def categorize_logs():
             formatted_logs["uncategorized"].append(log)
 
     print("The logs are:\n", formatted_logs)
+    return formatted_logs
+
+
+def create_changelog(logs):
+    f = open("CHANGELOG.md", "w+")
+    if logs:
+        for section in logs.items():
+            f.write(str(section[0] + ":\n").capitalize())
+            commits = section[1:][0]
+            for commit in commits:
+                print(commit)
+                f.write("\t" + str(commit) + "\n")
+            f.write("\n")
+    f.close()
+
 
 def main():
-    logs = categorize_logs()
-
+    create_changelog(categorize_logs())
 
 
 if __name__== "__main__":
