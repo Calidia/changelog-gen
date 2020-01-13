@@ -47,7 +47,7 @@ No other issues have been noted so far. Please do let me know if you stumble upo
 Python was chosen for the implementation of this project. The reason is because Python is the second language which I am most comfortable with after Java and is also one which you use in your company's technology stack.
 
 # Assessment Approach
-Firstly, I evaluated the existing solutions referenced by you, namely Conventional Commits and gitmoji. Moreover, I researched other developed solutions which could give me a better idea of the scope of the project and potential approaches. Please find those in the Resources section below. Consequently, I implemented a script which ran the git log command with pretty formatting options to extract the commiter name, relative date and the commit body. Then, those were categorized according to the supported types. That is then passed to a function which writes the CHANGELOG.md file containing the categories and respective commits data.
+Firstly, I evaluated the existing solutions referenced by you, namely Conventional Commits and gitmoji. Moreover, I researched other developed solutions which gave me a better idea of the scope of the project and potential approaches. Please find those in the Resources section below. Consequently, I implemented a script which ran the git log command with pretty formatting options to extract the commiter name, relative date and the commit body. Then, those were categorized according to the supported types. That is then passed to a function which writes the CHANGELOG.md file containing the categories and respective commits data. Later on I added functionality to request the repository folder from the user and exception handling as well.
 
 ## Resources
 Conventional Commits:
