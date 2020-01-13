@@ -1,9 +1,23 @@
 from subprocess import run
+import os
+
+
+def check_input(directory):
+    try:
+        os.chdir(directory)
+        return True
+    except:
+        print("The directory does not exist")
+        return False
 
 
 def categorize_logs():
-    logs = run(["git", "log", "--pretty=format:\"\u2022 %cn - %cd %s\""], capture_output=True, text=True)
-    logs = logs.stdout.replace("\"", "").split("\n")
+    logs = run(["git", "log", "--pretty=format:\"\u2022 %cn - %cr \n\tCommit - %s\"---"], capture_output=True, text=True)
+    if "not a git repository" in logs.stderr:
+        print("This directory does not contain a git repository")
+        return False
+
+    logs = logs.stdout.replace("\"", "").split("---")
 
     formatted_logs = {"uncategorized": []}
 
@@ -41,7 +55,6 @@ def categorize_logs():
         else:
             formatted_logs["uncategorized"].append(log)
 
-    print("The logs are:\n", formatted_logs)
     return formatted_logs
 
 
@@ -52,14 +65,25 @@ def create_changelog(logs):
             f.write(str(section[0] + ":\n").capitalize())
             commits = section[1:][0]
             for commit in commits:
-                print(commit)
                 f.write("\t" + str(commit) + "\n")
             f.write("\n")
     f.close()
 
 
 def main():
-    create_changelog(categorize_logs())
+    while True:
+        try:
+            directory = input("Please enter the repository directory to generate a change log in: ")
+        except:
+            print("Sorry, didn't catch that.")
+            continue
+
+        if check_input(directory):
+            logs = categorize_logs()
+            if logs:
+                create_changelog(logs)
+                print("Change log was successfully generated in directory - ", os.getcwd().split("\\")[-1])
+            break
 
 
 if __name__== "__main__":
