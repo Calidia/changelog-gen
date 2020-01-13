@@ -25,8 +25,16 @@ docs: Added README.md with instructions and further details regarding the projec
 ## Current Functionality
 
 ## Future Functionality
+**Versioning**
+    The next step for this project would be to add versioning which would give a better breakdown of the commits in larger projects which have multiple production iterations.
+**CHANGELOG.md Style**
+    Improving the formatting of the CHANGELOG.md file would ensure better readability.
+**Enhanced Syntax Handling**
+    The syntax will be enriched to contain, capture and categorize a wider variety of details for each commit.
 
 ## Known Issues
+**Buggy formatting of the CHANGELOG.md file**
+    Currently there are some issues which cause the formatting of the CHANGELOG.md file to be off. There are extra elements from the split function usage which I have not been able to handle yet.
 
 ## Technology Choices
 Python was chosen for the implementation of this project. The reason is because Python is the second language which I am most comfortable with after Java and is also one which you use in your company's technology stack.
